@@ -67,6 +67,7 @@ export const ProductView = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#fff',
   },
   backgroundContainer: {
     flex: 1,

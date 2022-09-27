@@ -27,6 +27,18 @@ export const Page = ({index, id, title, price, translateX}: PageProps) => {
     };
   });
 
+  const infoStyle = useAnimatedStyle(() => {
+    const opacity = interpolate(
+      translateX.value,
+      [(index - 1) * squareSize, index * squareSize, (index + 1) * squareSize],
+      [0, 1, 0],
+    );
+
+    return {
+      opacity: withSpring(opacity),
+    };
+  });
+
   return (
     <View style={styles.page} key={id}>
       <Animated.View style={[styles.square, animatedStyle]}>
@@ -34,10 +46,10 @@ export const Page = ({index, id, title, price, translateX}: PageProps) => {
           source={require('../../../../assets/images/coffee-cup.png')}
           style={styles.image}
         />
-        <View style={styles.info}>
+        <Animated.View style={[styles.info, infoStyle]}>
           <Text style={styles.title}>{title}</Text>
           <Text style={styles.price}>{price}</Text>
-        </View>
+        </Animated.View>
       </Animated.View>
     </View>
   );
@@ -67,8 +79,10 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 24,
+    color: '#000',
   },
   price: {
     fontSize: 20,
+    color: '#000',
   },
 });
