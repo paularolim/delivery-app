@@ -1,5 +1,11 @@
 import React from 'react';
 import {Dimensions, Image, StyleSheet, Text, View} from 'react-native';
+import Animated, {
+  Extrapolate,
+  interpolate,
+  useAnimatedStyle,
+  withSpring,
+} from 'react-native-reanimated';
 import {PageProps} from './types';
 
 const {width} = Dimensions.get('window');
@@ -7,19 +13,32 @@ const {width} = Dimensions.get('window');
 const squareSize = width * 0.5;
 const cupSize = width * 0.38;
 
-export const Page = ({id, title, price}: PageProps) => {
+export const Page = ({index, id, title, price, translateX}: PageProps) => {
+  const animatedStyle = useAnimatedStyle(() => {
+    const scale = interpolate(
+      translateX.value,
+      [(index - 1) * squareSize, index * squareSize, (index + 1) * squareSize],
+      [0.7, 1, 0.7],
+      Extrapolate.CLAMP,
+    );
+
+    return {
+      transform: [{scale: withSpring(scale)}],
+    };
+  });
+
   return (
     <View style={styles.page} key={id}>
-      <View style={styles.square}>
+      <Animated.View style={[styles.square, animatedStyle]}>
         <Image
           source={require('../../../../assets/images/coffee-cup.png')}
           style={styles.image}
         />
         <View style={styles.info}>
-          <Text>{title}</Text>
-          <Text>{price}</Text>
+          <Text style={styles.title}>{title}</Text>
+          <Text style={styles.price}>{price}</Text>
         </View>
-      </View>
+      </Animated.View>
     </View>
   );
 };
@@ -44,5 +63,12 @@ const styles = StyleSheet.create({
   },
   info: {
     alignItems: 'center',
+    marginTop: 20,
+  },
+  title: {
+    fontSize: 24,
+  },
+  price: {
+    fontSize: 20,
   },
 });
