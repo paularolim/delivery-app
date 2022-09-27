@@ -1,10 +1,6 @@
 import React from 'react';
-import {Text, View} from 'react-native';
+import {Product} from './screens/Product';
 
 export const App = () => {
-  return (
-    <View>
-      <Text>App.tsx</Text>
-    </View>
-  );
+  return <Product />;
 };
