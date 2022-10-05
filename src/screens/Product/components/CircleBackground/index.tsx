@@ -48,8 +48,9 @@ export function CircleBackground({currentIndex}: CircleBackgroundProps) {
         <AnimatedGradient
           colors={['#fff', '#fff']}
           animatedProps={animatedGradient}
-          start={{x: 1, y: 1}}
-          end={{x: 1, y: 0}}
+          locations={[0, 0.5]}
+          start={{x: 0.1, y: 1}}
+          end={{x: 0.1, y: 0.3}}
           style={styles.linearGradient}
         />
       )}
