@@ -3,32 +3,18 @@ import React from 'react';
 import {coffees} from './mocks';
 import {Page} from './components/Page';
 import Animated, {
-  interpolateColor,
   useAnimatedScrollHandler,
-  useAnimatedStyle,
   useSharedValue,
 } from 'react-native-reanimated';
+import {CircleBackground} from './components/CircleBackground';
 
 const {width} = Dimensions.get('window');
 
-const circleSize = width + 50;
 const pageSize = width * 0.5;
-const colors = ['#736F26', '#01619E', '#F65403', '#FF8901', '#FFBD28'];
 
 export const ProductView = () => {
   const currentIndex = useSharedValue(0);
   const translateX = useSharedValue(0);
-
-  const animatedStyle = useAnimatedStyle(() => {
-    const backgroundColor = interpolateColor(
-      currentIndex.value,
-      colors.map((_, index) => index),
-      colors,
-    );
-    return {
-      backgroundColor,
-    };
-  });
 
   const scrollHandler = useAnimatedScrollHandler(event => {
     translateX.value = event.contentOffset.x;
@@ -38,8 +24,9 @@ export const ProductView = () => {
   return (
     <View style={styles.container}>
       <View style={styles.backgroundContainer}>
-        <Animated.View style={[styles.circle, animatedStyle]} />
+        <CircleBackground currentIndex={currentIndex} />
       </View>
+
       <Animated.FlatList
         data={coffees}
         renderItem={({item, index}) => (
@@ -57,6 +44,7 @@ export const ProductView = () => {
         snapToInterval={pageSize}
         horizontal
         showsHorizontalScrollIndicator={false}
+        pagingEnabled
         onScroll={scrollHandler}
         scrollEventThrottle={64}
       />
@@ -72,12 +60,5 @@ const styles = StyleSheet.create({
   backgroundContainer: {
     flex: 1,
     position: 'absolute',
-  },
-  circle: {
-    width: circleSize,
-    height: circleSize,
-    borderRadius: circleSize / 2,
-    top: -circleSize / 2,
-    left: -25,
   },
 });
