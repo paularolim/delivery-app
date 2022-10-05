@@ -8,18 +8,11 @@ import Animated, {
   useAnimatedProps,
   useAnimatedStyle,
 } from 'react-native-reanimated';
+import {colors, gradients} from '../../../../common/colors';
+import {system} from '../../../../common/platform';
 import {CircleBackgroundProps} from './types';
 
 const AnimatedGradient = Animated.createAnimatedComponent(LinearGradient);
-
-const colors = ['#736F26', '#01619E', '#F65403', '#FF8901', '#FFBD28'];
-const gradients = [
-  ['#736F26', '#01619E'],
-  ['#01619E', '#F65403'],
-  ['#F65403', '#FF8901'],
-  ['#FF8901', '#FFBD28'],
-  ['#FFBD28', '#736F26'],
-];
 
 const {width} = Dimensions.get('window');
 const circleSize = width + 50;
@@ -54,13 +47,15 @@ export function CircleBackground({currentIndex}: CircleBackgroundProps) {
 
   return (
     <Animated.View style={[styles.circle, animatedStyle]}>
-      <AnimatedGradient
-        colors={['#fff', '#fff']}
-        animatedProps={animatedGradient}
-        start={{x: 1, y: 1}}
-        end={{x: 1, y: 0}}
-        style={styles.linearGradient}
-      />
+      {system === 'ios' && (
+        <AnimatedGradient
+          colors={['#fff', '#fff']}
+          animatedProps={animatedGradient}
+          start={{x: 1, y: 1}}
+          end={{x: 1, y: 0}}
+          style={styles.linearGradient}
+        />
+      )}
     </Animated.View>
   );
 }
