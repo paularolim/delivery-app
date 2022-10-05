@@ -1,4 +1,10 @@
-export const coffees = [
+export type DataProduct = {
+  id: string;
+  title: string;
+  price: string;
+};
+
+export const coffees: DataProduct[] = [
   {id: '1', title: 'Coffee 1', price: '$ 1.99'},
   {id: '2', title: 'Coffee 2', price: '$ 2.49'},
   {id: '3', title: 'Coffee 3', price: '$ 2.99'},

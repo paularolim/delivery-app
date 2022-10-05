@@ -1,16 +1,13 @@
-import {Dimensions, StyleSheet, View} from 'react-native';
-import React from 'react';
-import {coffees} from './mocks';
+import React, {useCallback} from 'react';
+import {coffees, DataProduct} from './mocks';
 import {Page} from './components/Page';
-import Animated, {
+import {
   useAnimatedScrollHandler,
   useSharedValue,
 } from 'react-native-reanimated';
 import {CircleBackground} from './components/CircleBackground';
-
-const {width} = Dimensions.get('window');
-
-const pageSize = width * 0.5;
+import {CircleContainer, Container, List, pageSize} from './styles';
+import {ListRenderItemInfo} from 'react-native';
 
 export const ProductView = () => {
   const currentIndex = useSharedValue(0);
@@ -21,26 +18,28 @@ export const ProductView = () => {
     currentIndex.value = event.contentOffset.x / pageSize;
   });
 
-  return (
-    <View style={styles.container}>
-      <View style={styles.backgroundContainer}>
-        <CircleBackground currentIndex={currentIndex} />
-      </View>
+  const RenderItem = useCallback(
+    ({item, index}: ListRenderItemInfo<DataProduct>) => (
+      <Page
+        index={index}
+        id={item.id}
+        title={item.title}
+        price={item.price}
+        translateX={translateX}
+      />
+    ),
+    [translateX],
+  );
 
-      <Animated.FlatList
+  return (
+    <Container>
+      <CircleContainer>
+        <CircleBackground currentIndex={currentIndex} />
+      </CircleContainer>
+
+      <List
         data={coffees}
-        renderItem={({item, index}) => (
-          <Page
-            index={index}
-            id={item.id}
-            title={item.title}
-            price={item.price}
-            translateX={translateX}
-          />
-        )}
-        contentContainerStyle={{
-          paddingHorizontal: width / 2 - pageSize / 2,
-        }}
+        renderItem={RenderItem}
         snapToInterval={pageSize}
         horizontal
         showsHorizontalScrollIndicator={false}
@@ -48,17 +47,6 @@ export const ProductView = () => {
         onScroll={scrollHandler}
         scrollEventThrottle={64}
       />
-    </View>
+    </Container>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-  },
-  backgroundContainer: {
-    flex: 1,
-    position: 'absolute',
-  },
-});

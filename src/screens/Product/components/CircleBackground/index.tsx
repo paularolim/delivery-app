@@ -1,5 +1,4 @@
 import React from 'react';
-import {Dimensions, StyleSheet} from 'react-native';
 import LinearGradient, {
   LinearGradientProps,
 } from 'react-native-linear-gradient';
@@ -10,12 +9,10 @@ import Animated, {
 } from 'react-native-reanimated';
 import {colors, gradients} from '../../../../common/colors';
 import {system} from '../../../../common/platform';
+import {Circle, styles} from './styles';
 import {CircleBackgroundProps} from './types';
 
 const AnimatedGradient = Animated.createAnimatedComponent(LinearGradient);
-
-const {width} = Dimensions.get('window');
-const circleSize = width + 50;
 
 export function CircleBackground({currentIndex}: CircleBackgroundProps) {
   const animatedStyle = useAnimatedStyle(() => {
@@ -46,7 +43,7 @@ export function CircleBackground({currentIndex}: CircleBackgroundProps) {
   });
 
   return (
-    <Animated.View style={[styles.circle, animatedStyle]}>
+    <Circle style={[animatedStyle]}>
       {system === 'ios' && (
         <AnimatedGradient
           colors={['#fff', '#fff']}
@@ -56,23 +53,6 @@ export function CircleBackground({currentIndex}: CircleBackgroundProps) {
           style={styles.linearGradient}
         />
       )}
-    </Animated.View>
+    </Circle>
   );
 }
-
-const styles = StyleSheet.create({
-  circle: {
-    width: circleSize,
-    height: circleSize,
-    borderRadius: circleSize / 2,
-    top: -circleSize / 2,
-    left: -25,
-    overflow: 'hidden',
-  },
-  linearGradient: {
-    flex: 1,
-    paddingLeft: 15,
-    paddingRight: 15,
-    borderRadius: 5,
-  },
-});
