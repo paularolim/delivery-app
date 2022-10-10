@@ -8,6 +8,7 @@ import {
 import {CircleBackground} from './components/CircleBackground';
 import {CircleContainer, Container, List, pageSize} from './styles';
 import {ListRenderItemInfo} from 'react-native';
+import {AlsoBuy} from './components/AlsoBuy';
 
 export const ProductView = () => {
   const currentIndex = useSharedValue(0);
@@ -47,6 +48,8 @@ export const ProductView = () => {
         onScroll={scrollHandler}
         scrollEventThrottle={64}
       />
+
+      <AlsoBuy currentIndex={currentIndex} />
     </Container>
   );
 };
