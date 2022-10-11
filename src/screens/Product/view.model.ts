@@ -1,3 +1,3 @@
-import {ProductViewModel} from './types';
+import { ProductViewModel } from './types';
 
 export function useProductViewModel(): ProductViewModel {}

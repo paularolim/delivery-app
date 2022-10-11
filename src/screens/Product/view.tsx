@@ -1,26 +1,26 @@
-import React, {useCallback} from 'react';
-import {coffees, DataProduct} from './mocks';
-import {Page} from './components/Page';
+import React, { useCallback } from 'react';
 import {
   useAnimatedScrollHandler,
   useSharedValue,
 } from 'react-native-reanimated';
-import {CircleBackground} from './components/CircleBackground';
-import {CircleContainer, Container, List, pageSize} from './styles';
-import {ListRenderItemInfo} from 'react-native';
-import {AlsoBuy} from './components/AlsoBuy';
+import { ListRenderItemInfo } from 'react-native';
+import { coffees, DataProduct } from './mocks';
+import { Page } from './components/Page';
+import { CircleBackground } from './components/CircleBackground';
+import { CircleContainer, Container, List, pageSize } from './styles';
+import { AlsoBuy } from './components/AlsoBuy';
 
-export const ProductView = () => {
+export function ProductView() {
   const currentIndex = useSharedValue(0);
   const translateX = useSharedValue(0);
 
-  const scrollHandler = useAnimatedScrollHandler(event => {
+  const scrollHandler = useAnimatedScrollHandler((event) => {
     translateX.value = event.contentOffset.x;
     currentIndex.value = event.contentOffset.x / pageSize;
   });
 
   const RenderItem = useCallback(
-    ({item, index}: ListRenderItemInfo<DataProduct>) => (
+    ({ item, index }: ListRenderItemInfo<DataProduct>) => (
       <Page
         index={index}
         id={item.id}
@@ -52,4 +52,4 @@ export const ProductView = () => {
       <AlsoBuy currentIndex={currentIndex} />
     </Container>
   );
-};
+}

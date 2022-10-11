@@ -1,1 +1,1 @@
-export {ProductView as Product} from './view';
+export { ProductView as Product } from './view';

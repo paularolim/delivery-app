@@ -1,8 +1,8 @@
-import {Dimensions, StyleSheet} from 'react-native';
+import { Dimensions, StyleSheet } from 'react-native';
 import Animated from 'react-native-reanimated';
 import styled from 'styled-components/native';
 
-const {width} = Dimensions.get('window');
+const { width } = Dimensions.get('window');
 const circleSize = width + 50;
 
 export const Circle = styled(Animated.View)`

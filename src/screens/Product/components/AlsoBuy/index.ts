@@ -1,1 +1,1 @@
-export {AlsoBuy} from './view';
+export { AlsoBuy } from './view';

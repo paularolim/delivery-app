@@ -1,8 +1,8 @@
-import {Dimensions, View} from 'react-native';
+import { Dimensions, View } from 'react-native';
 import Animated from 'react-native-reanimated';
 import styled from 'styled-components/native';
 
-const {width} = Dimensions.get('window');
+const { width } = Dimensions.get('window');
 export const pageSize = width * 0.5;
 
 export const Container = styled(View)`
@@ -16,8 +16,4 @@ export const CircleContainer = styled(View)`
   position: absolute;
 `;
 
-export const List = styled(Animated.FlatList).attrs({
-  contentContainerStyle: {
-    paddingHorizontal: width / 2 - pageSize / 2,
-  },
-})``;
+export const List = styled(Animated.FlatList).attrs({ contentContainerStyle: { paddingHorizontal: width / 2 - pageSize / 2 } })``;

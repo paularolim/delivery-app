@@ -1,8 +1,8 @@
-import {Dimensions, Image, Text, View} from 'react-native';
+import { Dimensions, Image, Text, View } from 'react-native';
 import Animated from 'react-native-reanimated';
 import styled from 'styled-components/native';
 
-const {width} = Dimensions.get('window');
+const { width } = Dimensions.get('window');
 
 export const squareSize = width * 0.5;
 export const cupSize = width * 0.38;

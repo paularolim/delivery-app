@@ -1,22 +1,11 @@
 import React from 'react';
-import {
-  Extrapolate,
-  interpolate,
-  useAnimatedStyle,
-  withSpring,
-} from 'react-native-reanimated';
-import {
-  Container,
-  Info,
-  Price,
-  ProductImage,
-  squareSize,
-  Title,
-  Wrapper,
-} from './styles';
-import {PageProps} from './types';
+import { Extrapolate, interpolate, useAnimatedStyle, withSpring } from 'react-native-reanimated';
+import { Container, Info, Price, ProductImage, squareSize, Title, Wrapper } from './styles';
+import { PageProps } from './types';
 
-export const Page = ({index, id, title, price, translateX}: PageProps) => {
+const image = require('../../../../assets/images/coffee-cup.png');
+
+export function Page({ index, id, title, price, translateX }: PageProps) {
   const animatedStyle = useAnimatedStyle(() => {
     const scale = interpolate(
       translateX.value,
@@ -25,9 +14,7 @@ export const Page = ({index, id, title, price, translateX}: PageProps) => {
       Extrapolate.CLAMP,
     );
 
-    return {
-      transform: [{scale: withSpring(scale)}],
-    };
+    return { transform: [{ scale: withSpring(scale) }] };
   });
 
   const infoStyle = useAnimatedStyle(() => {
@@ -38,17 +25,13 @@ export const Page = ({index, id, title, price, translateX}: PageProps) => {
       Extrapolate.CLAMP,
     );
 
-    return {
-      opacity: withSpring(opacity),
-    };
+    return { opacity: withSpring(opacity) };
   });
 
   return (
     <Container key={id}>
       <Wrapper style={animatedStyle}>
-        <ProductImage
-          source={require('../../../../assets/images/coffee-cup.png')}
-        />
+        <ProductImage source={image} />
         <Info style={infoStyle}>
           <Title>{title}</Title>
           <Price>{price}</Price>
@@ -56,4 +39,4 @@ export const Page = ({index, id, title, price, translateX}: PageProps) => {
       </Wrapper>
     </Container>
   );
-};
+}
