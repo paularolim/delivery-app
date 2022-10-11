@@ -34,7 +34,8 @@ export function AlsoBuy({ currentIndex }: AlsoBuyProps) {
     return { color };
   });
 
-  const Separator = useCallback(() => <View style={{ height: 12 }} />, []);
+  const HSeparator = useCallback(() => <View style={{ width: 12 }} />, []);
+  const VSeparator = useCallback(() => <View style={{ height: 12 }} />, []);
 
   const RenderHeader = useCallback(
     () => (
@@ -49,7 +50,7 @@ export function AlsoBuy({ currentIndex }: AlsoBuyProps) {
               </ItemContainer>
             )}
             horizontal
-            ItemSeparatorComponent={Separator}
+            ItemSeparatorComponent={HSeparator}
           />
         </View>
       </>
@@ -64,7 +65,7 @@ export function AlsoBuy({ currentIndex }: AlsoBuyProps) {
         renderItem={({ item }) => <ProductList {...item} />}
         contentContainerStyle={{ paddingHorizontal: 24, paddingBottom: 24 }}
         style={{ flex: 1 }}
-        ItemSeparatorComponent={Separator}
+        ItemSeparatorComponent={VSeparator}
         showsVerticalScrollIndicator={false}
         ListHeaderComponent={RenderHeader}
       />
