@@ -1,8 +1,5 @@
 import React, { useCallback } from 'react';
-import {
-  useAnimatedScrollHandler,
-  useSharedValue,
-} from 'react-native-reanimated';
+import { useAnimatedScrollHandler, useSharedValue } from 'react-native-reanimated';
 import { ListRenderItemInfo } from 'react-native';
 import { coffees, DataProduct } from './mocks';
 import { Page } from './components/Page';
