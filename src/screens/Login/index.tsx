@@ -1,9 +1,6 @@
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
-import { RootStackParamList } from '../../routes';
-
-type ScreenProps = NativeStackScreenProps<RootStackParamList, 'Login'>;
+import { ScreenProps } from './types';
 
 export function Login({ navigation }: ScreenProps) {
   return (
@@ -15,7 +12,7 @@ export function Login({ navigation }: ScreenProps) {
       }}
     >
       <TouchableOpacity
-        onPress={() => navigation.navigate('Product')}
+        onPress={() => navigation.navigate('AppRoutes', { screen: 'Product' })}
         style={{
           backgroundColor: '#ccc',
           paddingVertical: 12,
