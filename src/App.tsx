@@ -1,6 +1,6 @@
 import React from 'react';
-import {Product} from './screens/Product';
+import {Routes} from './routes';
 
 export const App = () => {
-  return <Product />;
+  return <Routes />;
 };
