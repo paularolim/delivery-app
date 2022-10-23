@@ -13,7 +13,15 @@ import { useRegisterViewModel } from './view.model';
 const { height } = Dimensions.get('window');
 
 export function RegisterView({ navigation, route }: ScreenProps) {
-  const { handleLogin } = useRegisterViewModel({ navigation, route });
+  // prettier-ignore
+  const {
+    handleLogin,
+    handleSignUp,
+    setEmail,
+    setName,
+    setPassword,
+    setPhone,
+  } = useRegisterViewModel({ navigation, route });
 
   return (
     <View style={{ height, backgroundColor: '#fff' }}>
@@ -30,12 +38,12 @@ export function RegisterView({ navigation, route }: ScreenProps) {
           <Logo />
           <TitlePage title="Sign up" />
 
-          <Input title="Name" placeholder="Name Lastname" />
-          <Input title="Email" placeholder="email@mail.com" />
-          <Input title="Password" placeholder="*********" />
-          <Input title="Phone" placeholder="(00) 00000-0000" />
+          <Input title="Name" placeholder="Name Lastname" onChangeText={setName} />
+          <Input title="Email" placeholder="email@mail.com" onChangeText={setEmail} />
+          <Input title="Password" placeholder="*********" onChangeText={setPassword} />
+          <Input title="Phone" placeholder="(00) 00000-0000" onChangeText={setPhone} />
 
-          <Button>Sign up</Button>
+          <Button onPress={handleSignUp}>Sign up</Button>
 
           <GroupLabelFooter label="Already have account?" linkLabel="Login" onPress={handleLogin} />
         </ScrollView>
