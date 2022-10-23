@@ -8,29 +8,39 @@ import { Logo } from '../../components/Logo';
 import { TitlePage } from '../../components/TitlePage';
 
 import { Container } from './styles';
+import { useLoginViewModel } from './view.model';
 
 export function LoginView() {
+  const { handleLogin, setEmail, setPassword } = useLoginViewModel();
+
   return (
     <Container>
       <BackgroundCircles />
+
       <Logo />
+
       <TitlePage title="Login" />
 
-      <Input title="Email" placeholder="email@mail.com" />
+      <Input
+        title="Email"
+        placeholder="email@mail.com"
+        onChangeText={setEmail}
+        keyboardType="default"
+        autoCapitalize="none"
+      />
 
       <Input
         title="password"
-        placeholder="password"
+        placeholder="*****"
         linkLabel="Forgot password?"
+        onChangeText={setPassword}
+        keyboardType="default"
+        autoCapitalize="none"
       />
 
-      <Button>Login</Button>
+      <Button onPress={handleLogin}>Login</Button>
 
-      <GroupLabelFooter
-        label="Don't have an account?"
-        linkLabel="Sign up"
-        onPress={() => {}}
-      />
+      <GroupLabelFooter label="Don't have an account?" linkLabel="Sign up" onPress={() => {}} />
     </Container>
   );
 }
