@@ -8,10 +8,14 @@ import { Logo } from '../../components/Logo';
 import { TitlePage } from '../../components/TitlePage';
 
 import { Container } from './styles';
+import { ScreenProps } from './types';
 import { useLoginViewModel } from './view.model';
 
-export function LoginView() {
-  const { handleLogin, setEmail, setPassword } = useLoginViewModel();
+export function LoginView({ navigation, route }: ScreenProps) {
+  const { handleLogin, handleSignUp, setEmail, setPassword } = useLoginViewModel({
+    navigation,
+    route,
+  });
 
   return (
     <Container>
@@ -40,7 +44,7 @@ export function LoginView() {
 
       <Button onPress={handleLogin}>Login</Button>
 
-      <GroupLabelFooter label="Don't have an account?" linkLabel="Sign up" onPress={() => {}} />
+      <GroupLabelFooter label="Don't have an account?" linkLabel="Sign up" onPress={handleSignUp} />
     </Container>
   );
 }

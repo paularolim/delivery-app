@@ -6,5 +6,6 @@ export type DrawerScreens = {
 
 export type StackScreens = {
   Login: undefined;
+  Register: undefined;
   AppRoutes: NavigatorScreenParams<DrawerScreens>;
 };

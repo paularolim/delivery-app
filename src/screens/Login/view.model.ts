@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { useAuth } from '../../contexts/Auth';
-import { LoginViewModel } from './types';
+import { LoginViewModel, ScreenProps } from './types';
 
-export function useLoginViewModel(): LoginViewModel {
+export function useLoginViewModel({ navigation }: ScreenProps): LoginViewModel {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -12,5 +12,9 @@ export function useLoginViewModel(): LoginViewModel {
     login({ email, password });
   };
 
-  return { handleLogin, setEmail, setPassword };
+  const handleSignUp = (): void => {
+    navigation.navigate('Register');
+  };
+
+  return { handleLogin, handleSignUp, setEmail, setPassword };
 }

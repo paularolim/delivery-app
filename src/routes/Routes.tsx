@@ -2,6 +2,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React from 'react';
 import { useAuth } from '../contexts/Auth';
 import { Login } from '../screens/Login';
+import { Register } from '../screens/Register';
 import { AppRoutes } from './App.routes';
 import { StackScreens } from './types';
 
@@ -15,6 +16,7 @@ export function Routes() {
       {!isLoggedIn && (
         <Stack.Group navigationKey="Auth" screenOptions={{ headerShown: false }}>
           <Stack.Screen name="Login" component={Login} />
+          <Stack.Screen name="Register" component={Register} />
         </Stack.Group>
       )}
 
