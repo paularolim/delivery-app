@@ -13,11 +13,16 @@ export function AuthProvider({ children }: AuthProviderProps) {
     }
   }, []);
 
+  const logout = useCallback(() => {
+    setUser(() => null);
+  }, []);
+
   const value: AuthContextProps = useMemo(
     () => ({
       isLoggedIn: Boolean(user),
       user,
       login,
+      logout,
     }),
     [user],
   );

@@ -10,16 +10,29 @@ import {
   Name,
   Profile,
 } from './styles';
+import { DrawerMenuProps } from './types';
 
-export function DrawerMenu() {
+export function DrawerMenu({
+  isLoggedIn,
+  onPressLogin,
+  onPressProfile,
+  onPressLogout,
+}: DrawerMenuProps) {
   return (
     <>
-      <HeaderContainer>
+      <HeaderContainer onPress={isLoggedIn ? onPressProfile : onPressLogin}>
         <Icon name="user" size={40} color="#000000" />
-        <Info>
-          <Name>Username</Name>
-          <Profile>View profile</Profile>
-        </Info>
+        {isLoggedIn ? (
+          <Info>
+            <Name>Username</Name>
+            <Profile>View profile</Profile>
+          </Info>
+        ) : (
+          <Info>
+            <Name>Did you like?</Name>
+            <Profile>Login</Profile>
+          </Info>
+        )}
         <Icon name="chevron-right" size={20} color="#cccccc" />
       </HeaderContainer>
 
@@ -30,12 +43,14 @@ export function DrawerMenu() {
         </ItemContainer>
       </List>
 
-      <FooterContainer>
-        <ItemContainer>
-          <Icon name="sign-out" size={30} color="#000000" />
-          <ItemLabel>Sair</ItemLabel>
-        </ItemContainer>
-      </FooterContainer>
+      {isLoggedIn && (
+        <FooterContainer>
+          <ItemContainer onPress={onPressLogout}>
+            <Icon name="sign-out" size={30} color="#000000" />
+            <ItemLabel>Sair</ItemLabel>
+          </ItemContainer>
+        </FooterContainer>
+      )}
     </>
   );
 }

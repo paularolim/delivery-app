@@ -13,7 +13,8 @@ export interface User {
 export interface AuthContextProps {
   isLoggedIn: boolean;
   user: User | null;
-  login: ({ email, password }: LoginParams) => void;
+  login: ({ email, password }: LoginParams) => Promise<void>;
+  logout: () => void;
 }
 
 export interface AuthProviderProps {
