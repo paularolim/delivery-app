@@ -4,7 +4,7 @@
 
 - [ ] improve this documentation
 - [x] create icon component
-- [ ] add password visibility to input
+- [x] add password visibility to input
 - [ ] add form validations to login (react hook form & yup)
 - [ ] add loading feedback to login
 - [ ] add error feedback to login
