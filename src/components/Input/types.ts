@@ -1,6 +1,9 @@
-import { TextInputProps } from 'react-native';
+import { TextInputProps, TextProps, TouchableOpacityProps, ViewProps } from 'react-native';
 
-export interface InputViewProps extends TextInputProps {
-  title: string;
-  linkLabel?: string;
-}
+export interface InputFieldProps extends TextInputProps {}
+
+export interface InputLabelProps extends TextProps {}
+
+export interface InputRootProps extends ViewProps {}
+
+export interface InputIconProps extends TouchableOpacityProps {}
