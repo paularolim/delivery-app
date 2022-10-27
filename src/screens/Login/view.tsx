@@ -1,5 +1,7 @@
 import React from 'react';
+import { Dimensions } from 'react-native';
 
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { BackgroundCircles } from '../../components/BackgroundCircles';
 import { Button } from '../../components/Button';
 import { GroupLabelFooter } from '../../components/GroupLabelFooter';
@@ -12,6 +14,8 @@ import { Container, InputGroup } from './styles';
 import { ScreenProps } from './types';
 import { useLoginViewModel } from './view.model';
 
+const { height, width } = Dimensions.get('screen');
+
 export function LoginView({ navigation, route }: ScreenProps) {
   // eslint-disable-next-line max-len
   const { handleLogin, handleSignUp, setEmail, setPassword, showPassword, toggleSecure } = useLoginViewModel({
@@ -20,44 +24,53 @@ export function LoginView({ navigation, route }: ScreenProps) {
   });
 
   return (
-    <Container>
-      <BackgroundCircles />
+    <KeyboardAwareScrollView
+      keyboardShouldPersistTaps="handled"
+      contentContainerStyle={{ height, width }}
+    >
+      <Container>
+        <BackgroundCircles />
 
-      <Logo />
+        <Logo />
 
-      <TitlePage title="Login" />
+        <TitlePage title="Login" />
 
-      <InputGroup>
-        <Input.Label>E-mail</Input.Label>
-        <Input.Root>
-          <Input.Field
-            placeholder="email@mail.com"
-            onChangeText={setEmail}
-            keyboardType="email-address"
-            autoCapitalize="none"
-          />
-        </Input.Root>
-      </InputGroup>
+        <InputGroup>
+          <Input.Label>E-mail</Input.Label>
+          <Input.Root>
+            <Input.Field
+              placeholder="email@mail.com"
+              onChangeText={setEmail}
+              keyboardType="email-address"
+              autoCapitalize="none"
+            />
+          </Input.Root>
+        </InputGroup>
 
-      <InputGroup>
-        <Input.Label>Password</Input.Label>
-        <Input.Root>
-          <Input.Field
-            placeholder="********"
-            onChangeText={setPassword}
-            keyboardType="default"
-            autoCapitalize="none"
-            secureTextEntry={showPassword}
-          />
-          <Input.Icon onPress={toggleSecure}>
-            <Icon name={showPassword ? 'eye' : 'eye-off'} size={20} color="#666" />
-          </Input.Icon>
-        </Input.Root>
-      </InputGroup>
+        <InputGroup>
+          <Input.Label>Password</Input.Label>
+          <Input.Root>
+            <Input.Field
+              placeholder="********"
+              onChangeText={setPassword}
+              keyboardType="default"
+              autoCapitalize="none"
+              secureTextEntry={showPassword}
+            />
+            <Input.Icon onPress={toggleSecure}>
+              <Icon name={showPassword ? 'eye' : 'eye-off'} size={20} color="#666" />
+            </Input.Icon>
+          </Input.Root>
+        </InputGroup>
 
-      <Button onPress={handleLogin}>Login</Button>
+        <Button onPress={handleLogin}>Login</Button>
 
-      <GroupLabelFooter label="Don't have an account?" linkLabel="Sign up" onPress={handleSignUp} />
-    </Container>
+        <GroupLabelFooter
+          label="Don't have an account?"
+          linkLabel="Sign up"
+          onPress={handleSignUp}
+        />
+      </Container>
+    </KeyboardAwareScrollView>
   );
 }
