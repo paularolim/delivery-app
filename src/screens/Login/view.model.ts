@@ -6,6 +6,8 @@ export function useLoginViewModel({ navigation }: ScreenProps): LoginViewModel {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  const [showPassword, setShowPassword] = useState(false);
+
   const { login } = useAuth();
 
   const handleLogin = async (): Promise<void> => {
@@ -16,5 +18,9 @@ export function useLoginViewModel({ navigation }: ScreenProps): LoginViewModel {
     navigation.navigate('Register');
   };
 
-  return { handleLogin, handleSignUp, setEmail, setPassword };
+  const toggleSecure = (): void => {
+    setShowPassword(!showPassword);
+  };
+
+  return { handleLogin, handleSignUp, setEmail, setPassword, toggleSecure, showPassword };
 }
