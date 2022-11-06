@@ -92,6 +92,7 @@ export function RegisterView({ navigation, route }: ScreenProps) {
                 onChangeText={setPhone}
                 keyboardType="phone-pad"
                 autoCapitalize="none"
+                maskType="phone-br"
               />
             </Input.Root>
           </InputGroup>

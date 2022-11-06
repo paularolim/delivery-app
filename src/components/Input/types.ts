@@ -1,9 +1,13 @@
 import { TextInputProps, TextProps, TouchableOpacityProps, ViewProps } from 'react-native';
 
-export interface InputFieldProps extends TextInputProps {}
+export type MasksType = 'phone-br'
 
-export interface InputLabelProps extends TextProps {}
+export interface InputFieldProps extends TextInputProps {
+  maskType?: MasksType
+}
 
-export interface InputRootProps extends ViewProps {}
+export interface InputLabelProps extends TextProps { }
 
-export interface InputIconProps extends TouchableOpacityProps {}
+export interface InputRootProps extends ViewProps { }
+
+export interface InputIconProps extends TouchableOpacityProps { }

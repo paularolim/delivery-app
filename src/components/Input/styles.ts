@@ -1,4 +1,5 @@
 import { View, TextInput, Text, TouchableOpacity } from 'react-native';
+import TextInputMask from 'react-native-text-input-mask';
 import styled from 'styled-components';
 
 export const Container = styled(View)`
@@ -16,6 +17,13 @@ export const Label = styled(Text)`
 `;
 
 export const RNInput = styled(TextInput)`
+  color: #666666;
+  width: 100%;
+  padding: 10px 15px;
+  flex: 1;
+`;
+
+export const RNMaskInput = styled(TextInputMask)`
   color: #666666;
   width: 100%;
   padding: 10px 15px;
