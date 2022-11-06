@@ -7,6 +7,7 @@ import { GroupLabelFooter } from '../../components/GroupLabelFooter';
 import { Input } from '../../components/Input';
 import { Logo } from '../../components/Logo';
 import { TitlePage } from '../../components/TitlePage';
+import { InputGroup } from './styles';
 import { ScreenProps } from './types';
 import { useRegisterViewModel } from './view.model';
 
@@ -24,7 +25,7 @@ export function RegisterView({ navigation, route }: ScreenProps) {
   } = useRegisterViewModel({ navigation, route });
 
   return (
-    <View style={{ height, backgroundColor: '#fff' }}>
+    <View style={{ height, backgroundColor: '#fff', overflow: 'hidden' }}>
       <BackgroundCircles />
 
       <View style={{ position: 'absolute', width: '100%', height }}>
@@ -38,10 +39,53 @@ export function RegisterView({ navigation, route }: ScreenProps) {
           <Logo />
           <TitlePage title="Sign up" />
 
-          <Input title="Name" placeholder="Name Lastname" onChangeText={setName} />
-          <Input title="Email" placeholder="email@mail.com" onChangeText={setEmail} />
-          <Input title="Password" placeholder="*********" onChangeText={setPassword} />
-          <Input title="Phone" placeholder="(00) 00000-0000" onChangeText={setPhone} />
+          <InputGroup>
+            <Input.Label>Name</Input.Label>
+            <Input.Root>
+              <Input.Field
+                placeholder="Name Lastname"
+                onChangeText={setName}
+                keyboardType="default"
+                autoCapitalize="words"
+              />
+            </Input.Root>
+          </InputGroup>
+
+          <InputGroup>
+            <Input.Label>E-mail</Input.Label>
+            <Input.Root>
+              <Input.Field
+                placeholder="example@mail.com"
+                onChangeText={setEmail}
+                keyboardType="email-address"
+                autoCapitalize="none"
+              />
+            </Input.Root>
+          </InputGroup>
+
+          <InputGroup>
+            <Input.Label>Password</Input.Label>
+            <Input.Root>
+              <Input.Field
+                placeholder="***********"
+                onChangeText={setPassword}
+                keyboardType="default"
+                autoCapitalize="none"
+              />
+            </Input.Root>
+          </InputGroup>
+
+          <InputGroup>
+            <Input.Label>Phone</Input.Label>
+            <Input.Root>
+              <Input.Field
+                placeholder="(00) 00000-0000"
+                onChangeText={setPhone}
+                keyboardType="phone-pad"
+                autoCapitalize="none"
+              />
+            </Input.Root>
+          </InputGroup>
 
           <Button onPress={handleSignUp}>Sign up</Button>
 

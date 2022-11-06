@@ -7,7 +7,7 @@ function InputRoot({ children }: InputRootProps) {
 }
 
 function InputField({ ...rest }: InputFieldProps) {
-  return <RNInput {...rest} />;
+  return <RNInput placeholderTextColor="#333" {...rest} />;
 }
 
 function InputIcon({ children, ...rest }: InputIconProps) {

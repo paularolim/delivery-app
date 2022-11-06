@@ -8,3 +8,8 @@ export const Container = styled(View)`
   margin-bottom: 24px;
   height: 100%;
 `;
+
+export const InputGroup = styled(View)`
+  margin-bottom: 24px;
+  width: 100%;
+`;

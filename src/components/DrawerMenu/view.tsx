@@ -1,4 +1,5 @@
 import React from 'react';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {
   FooterContainer,
@@ -19,7 +20,7 @@ export function DrawerMenu({
   onPressLogout,
 }: DrawerMenuProps) {
   return (
-    <>
+    <SafeAreaView style={{ flex: 1 }}>
       <HeaderContainer onPress={isLoggedIn ? onPressProfile : onPressLogin}>
         <Icon name="user" size={40} color="#000000" />
         {isLoggedIn ? (
@@ -51,6 +52,6 @@ export function DrawerMenu({
           </ItemContainer>
         </FooterContainer>
       )}
-    </>
+    </SafeAreaView>
   );
 }
