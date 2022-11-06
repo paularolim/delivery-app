@@ -1,9 +1,11 @@
 import React from 'react';
-import { Dimensions, ScrollView, View } from 'react-native';
+import { Dimensions, View } from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 import { BackgroundCircles } from '../../components/BackgroundCircles';
 import { Button } from '../../components/Button';
 import { GroupLabelFooter } from '../../components/GroupLabelFooter';
+import { Icon } from '../../components/Icon';
 import { Input } from '../../components/Input';
 import { Logo } from '../../components/Logo';
 import { TitlePage } from '../../components/TitlePage';
@@ -22,6 +24,8 @@ export function RegisterView({ navigation, route }: ScreenProps) {
     setName,
     setPassword,
     setPhone,
+    secureMode,
+    toggleSecure,
   } = useRegisterViewModel({ navigation, route });
 
   return (
@@ -29,7 +33,8 @@ export function RegisterView({ navigation, route }: ScreenProps) {
       <BackgroundCircles />
 
       <View style={{ position: 'absolute', width: '100%', height }}>
-        <ScrollView
+        <KeyboardAwareScrollView
+          keyboardShouldPersistTaps="handled"
           contentContainerStyle={{
             paddingHorizontal: 24,
             paddingVertical: 56,
@@ -67,11 +72,15 @@ export function RegisterView({ navigation, route }: ScreenProps) {
             <Input.Label>Password</Input.Label>
             <Input.Root>
               <Input.Field
-                placeholder="***********"
+                placeholder="********"
                 onChangeText={setPassword}
                 keyboardType="default"
                 autoCapitalize="none"
+                secureTextEntry={secureMode}
               />
+              <Input.Icon onPress={toggleSecure}>
+                <Icon name={secureMode ? 'eye' : 'eye-off'} size={20} color="#666" />
+              </Input.Icon>
             </Input.Root>
           </InputGroup>
 
@@ -90,7 +99,7 @@ export function RegisterView({ navigation, route }: ScreenProps) {
           <Button onPress={handleSignUp}>Sign up</Button>
 
           <GroupLabelFooter label="Already have account?" linkLabel="Login" onPress={handleLogin} />
-        </ScrollView>
+        </KeyboardAwareScrollView>
       </View>
     </View>
   );

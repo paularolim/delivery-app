@@ -11,4 +11,6 @@ export interface RegisterViewModel {
   setEmail: (text: string) => void;
   setPassword: (text: string) => void;
   setPhone: (text: string) => void;
+  secureMode: boolean;
+  toggleSecure: () => void;
 }

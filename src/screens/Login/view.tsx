@@ -17,8 +17,15 @@ import { useLoginViewModel } from './view.model';
 const { height, width } = Dimensions.get('screen');
 
 export function LoginView({ navigation, route }: ScreenProps) {
-  // eslint-disable-next-line max-len
-  const { handleLogin, handleSignUp, setEmail, setPassword, showPassword, toggleSecure } = useLoginViewModel({
+  // prettier-ignore
+  const {
+    handleLogin,
+    handleSignUp,
+    setEmail,
+    setPassword,
+    secureMode,
+    toggleSecure,
+  } = useLoginViewModel({
     navigation,
     route,
   });
@@ -55,10 +62,10 @@ export function LoginView({ navigation, route }: ScreenProps) {
               onChangeText={setPassword}
               keyboardType="default"
               autoCapitalize="none"
-              secureTextEntry={showPassword}
+              secureTextEntry={secureMode}
             />
             <Input.Icon onPress={toggleSecure}>
-              <Icon name={showPassword ? 'eye' : 'eye-off'} size={20} color="#666" />
+              <Icon name={secureMode ? 'eye' : 'eye-off'} size={20} color="#666" />
             </Input.Icon>
           </Input.Root>
         </InputGroup>

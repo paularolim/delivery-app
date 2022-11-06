@@ -8,6 +8,6 @@ export interface LoginViewModel {
   setPassword: (password: string) => void;
   handleLogin: () => Promise<void>;
   handleSignUp: () => void;
-  showPassword: boolean;
+  secureMode: boolean;
   toggleSecure: () => void;
 }

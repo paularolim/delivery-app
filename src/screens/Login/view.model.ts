@@ -6,7 +6,7 @@ export function useLoginViewModel({ navigation }: ScreenProps): LoginViewModel {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const [showPassword, setShowPassword] = useState(false);
+  const [secureMode, setSecureMode] = useState(true);
 
   const { login } = useAuth();
 
@@ -19,8 +19,8 @@ export function useLoginViewModel({ navigation }: ScreenProps): LoginViewModel {
   };
 
   const toggleSecure = (): void => {
-    setShowPassword(!showPassword);
+    setSecureMode(!secureMode);
   };
 
-  return { handleLogin, handleSignUp, setEmail, setPassword, toggleSecure, showPassword };
+  return { handleLogin, handleSignUp, setEmail, setPassword, toggleSecure, secureMode };
 }

@@ -8,6 +8,8 @@ export function useRegisterViewModel({ navigation }: ScreenProps): RegisterViewM
   const [password, setPassword] = useState('');
   const [phone, setPhone] = useState('');
 
+  const [secureMode, setSecureMode] = useState(true);
+
   const handleLogin = (): void => {
     navigation.navigate('Login');
   };
@@ -19,6 +21,10 @@ export function useRegisterViewModel({ navigation }: ScreenProps): RegisterViewM
     }
   };
 
+  const toggleSecure = (): void => {
+    setSecureMode(!secureMode);
+  };
+
   return {
     handleLogin,
     handleSignUp,
@@ -26,5 +32,7 @@ export function useRegisterViewModel({ navigation }: ScreenProps): RegisterViewM
     setEmail,
     setPassword,
     setPhone,
+    toggleSecure,
+    secureMode,
   };
 }
