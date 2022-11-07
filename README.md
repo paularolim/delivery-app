@@ -19,3 +19,9 @@
 - [ ] create profile screen
 - [ ] create favorites screen
 - [ ] persist logged user data
+
+## Troubleshoot
+
+### Android Build Error - react-native-text-input-mask
+
+in the file **node_modules/react-native-text-input-mask/android/build.gradle** change kotlin version to **1.6.0**
