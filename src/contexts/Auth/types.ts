@@ -7,6 +7,7 @@ export interface LoginParams {
 }
 
 export interface User {
+  id: string;
   name: string;
 }
 

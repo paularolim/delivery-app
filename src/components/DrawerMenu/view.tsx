@@ -14,6 +14,7 @@ import {
 import { DrawerMenuProps } from './types';
 
 export function DrawerMenu({
+  username,
   isLoggedIn,
   onPressLogin,
   onPressProfile,
@@ -25,7 +26,7 @@ export function DrawerMenu({
         <Icon name="user" size={40} color="#000000" />
         {isLoggedIn ? (
           <Info>
-            <Name>Username</Name>
+            <Name>{username}</Name>
             <Profile>View profile</Profile>
           </Info>
         ) : (

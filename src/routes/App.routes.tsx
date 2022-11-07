@@ -11,12 +11,13 @@ const Drawer = createDrawerNavigator();
 export function AppRoutes() {
   const navigation = useNavigation();
 
-  const { logout, isLoggedIn } = useAuth();
+  const { logout, isLoggedIn, user } = useAuth();
 
   const header = useCallback(() => <DrawerHeader />, []);
   const drawerContent = useCallback(
     () => (
       <DrawerMenu
+        username={user?.name || ''}
         isLoggedIn={isLoggedIn}
         onPressLogout={logout}
         onPressLogin={() => navigation.navigate('Login' as never)}

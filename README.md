@@ -14,7 +14,7 @@
 - [ ] add error feedback to sign up
 - [x] hide keyboard when tap outside input to sign up
 - [x] add phone mask to input on sign up
-- [ ] decode jwt and show user name on drawer menu
+- [x] decode jwt and show user name on drawer menu
 - [ ] create home screen
 - [ ] create profile screen
 - [ ] create favorites screen
