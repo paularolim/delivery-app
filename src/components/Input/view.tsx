@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, IconContainer, Label, RNInput, RNMaskInput } from './styles';
+import { Container, Error, IconContainer, Label, RNInput, RNMaskInput } from './styles';
 import {
   InputFieldProps,
   InputIconProps,
@@ -31,14 +31,20 @@ function InputLabel({ children }: InputLabelProps) {
   return <Label>{children}</Label>;
 }
 
+function InputError({ children }: InputLabelProps) {
+  return <Error>{children}</Error>;
+}
+
 InputRoot.displayName = 'Input.Root';
 InputField.displayName = 'Input.Field';
 InputIcon.displayName = 'Input.Icon';
 InputLabel.displayName = 'Input.Label';
+InputError.displayName = 'Input.Error';
 
 export const Input = {
   Root: InputRoot,
   Field: InputField,
   Icon: InputIcon,
   Label: InputLabel,
+  Error: InputError,
 };

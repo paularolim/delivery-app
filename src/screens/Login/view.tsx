@@ -1,5 +1,7 @@
 import React from 'react';
-import { Dimensions } from 'react-native';
+import { Dimensions, View } from 'react-native';
+import { useForm, Controller } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
 
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { BackgroundCircles } from '../../components/BackgroundCircles';
@@ -10,19 +12,18 @@ import { Input } from '../../components/Input';
 import { Logo } from '../../components/Logo';
 import { TitlePage } from '../../components/TitlePage';
 
-import { Container, InputGroup } from './styles';
+import { InputGroup } from './styles';
 import { ScreenProps } from './types';
 import { useLoginViewModel } from './view.model';
+import { schema, ValidationSchema } from './validation';
 
-const { height, width } = Dimensions.get('screen');
+const { height } = Dimensions.get('screen');
 
 export function LoginView({ navigation, route }: ScreenProps) {
   // prettier-ignore
   const {
     handleLogin,
     handleSignUp,
-    setEmail,
-    setPassword,
     secureMode,
     toggleSecure,
   } = useLoginViewModel({
@@ -30,54 +31,88 @@ export function LoginView({ navigation, route }: ScreenProps) {
     route,
   });
 
+  const { control, handleSubmit } = useForm<ValidationSchema>({ resolver: yupResolver(schema) });
+
+  const onSubmit = (data: ValidationSchema) => {
+    handleLogin(data.email, data.password);
+  };
+
   return (
-    <KeyboardAwareScrollView
-      keyboardShouldPersistTaps="handled"
-      contentContainerStyle={{ height, width }}
-    >
-      <Container>
-        <BackgroundCircles />
+    <View style={{ height, backgroundColor: '#fff', overflow: 'hidden' }}>
+      <BackgroundCircles />
 
-        <Logo />
+      <View style={{ position: 'absolute', width: '100%', height }}>
+        <KeyboardAwareScrollView
+          keyboardShouldPersistTaps="handled"
+          contentContainerStyle={{
+            paddingHorizontal: 24,
+            paddingVertical: 56,
+            alignItems: 'center',
+          }}
+        >
+          <Logo />
 
-        <TitlePage title="Login" />
+          <TitlePage title="Login" />
 
-        <InputGroup>
-          <Input.Label>E-mail</Input.Label>
-          <Input.Root>
-            <Input.Field
-              placeholder="email@mail.com"
-              onChangeText={setEmail}
-              keyboardType="email-address"
-              autoCapitalize="none"
-            />
-          </Input.Root>
-        </InputGroup>
+          <Controller
+            control={control}
+            name="email"
+            render={({ field: { onChange, onBlur, value }, fieldState: { error } }) => (
+              <InputGroup>
+                <Input.Label>E-mail</Input.Label>
+                <Input.Root>
+                  <Input.Field
+                    placeholder="email@mail.com"
+                    keyboardType="email-address"
+                    autoCapitalize="none"
+                    autoComplete="off"
+                    autoCorrect={false}
+                    onChangeText={onChange}
+                    onBlur={onBlur}
+                    value={value}
+                    maxLength={60}
+                  />
+                </Input.Root>
+                <Input.Error>{error?.message || ''}</Input.Error>
+              </InputGroup>
+            )}
+          />
 
-        <InputGroup>
-          <Input.Label>Password</Input.Label>
-          <Input.Root>
-            <Input.Field
-              placeholder="********"
-              onChangeText={setPassword}
-              keyboardType="default"
-              autoCapitalize="none"
-              secureTextEntry={secureMode}
-            />
-            <Input.Icon onPress={toggleSecure}>
-              <Icon name={secureMode ? 'eye' : 'eye-off'} size={20} color="#666" />
-            </Input.Icon>
-          </Input.Root>
-        </InputGroup>
+          <Controller
+            control={control}
+            name="password"
+            render={({ field: { onChange, onBlur, value }, fieldState: { error } }) => (
+              <InputGroup>
+                <Input.Label>Password</Input.Label>
+                <Input.Root>
+                  <Input.Field
+                    placeholder="********"
+                    keyboardType="default"
+                    autoCapitalize="none"
+                    secureTextEntry={secureMode}
+                    onChangeText={onChange}
+                    onBlur={onBlur}
+                    value={value}
+                    maxLength={10}
+                  />
+                  <Input.Icon onPress={toggleSecure}>
+                    <Icon name={secureMode ? 'eye' : 'eye-off'} size={20} color="#666" />
+                  </Input.Icon>
+                </Input.Root>
+                <Input.Error>{error?.message || ''}</Input.Error>
+              </InputGroup>
+            )}
+          />
 
-        <Button onPress={handleLogin}>Login</Button>
+          <Button onPress={handleSubmit(onSubmit)}>Login</Button>
 
-        <GroupLabelFooter
-          label="Don't have an account?"
-          linkLabel="Sign up"
-          onPress={handleSignUp}
-        />
-      </Container>
-    </KeyboardAwareScrollView>
+          <GroupLabelFooter
+            label="Don't have an account?"
+            linkLabel="Sign up"
+            onPress={handleSignUp}
+          />
+        </KeyboardAwareScrollView>
+      </View>
+    </View>
   );
 }

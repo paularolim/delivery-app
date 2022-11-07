@@ -6,11 +6,7 @@ export type ScreenProps = NativeStackScreenProps<StackScreens, 'Register'>;
 
 export interface RegisterViewModel {
   handleLogin: () => void;
-  handleSignUp: () => Promise<void>;
-  setName: (text: string) => void;
-  setEmail: (text: string) => void;
-  setPassword: (text: string) => void;
-  setPhone: (text: string) => void;
+  handleSignUp: (name: string, email: string, password: string, phone: string) => Promise<void>;
   secureMode: boolean;
   toggleSecure: () => void;
 }

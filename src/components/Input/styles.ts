@@ -37,3 +37,10 @@ export const IconContainer = styled(TouchableOpacity)`
   align-items: center;
   padding: 0px 10px;
 `;
+
+export const Error = styled(Text)`
+  font-size: 10px;
+  color: red;
+  width: 100%;
+  margin-top: 5px;
+`;

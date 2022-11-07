@@ -3,14 +3,11 @@ import { useAuth } from '../../contexts/Auth';
 import { LoginViewModel, ScreenProps } from './types';
 
 export function useLoginViewModel({ navigation }: ScreenProps): LoginViewModel {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-
   const [secureMode, setSecureMode] = useState(true);
 
   const { login } = useAuth();
 
-  const handleLogin = async (): Promise<void> => {
+  const handleLogin = async (email: string, password: string): Promise<void> => {
     login({ email, password });
   };
 
@@ -22,5 +19,5 @@ export function useLoginViewModel({ navigation }: ScreenProps): LoginViewModel {
     setSecureMode(!secureMode);
   };
 
-  return { handleLogin, handleSignUp, setEmail, setPassword, toggleSecure, secureMode };
+  return { handleLogin, handleSignUp, toggleSecure, secureMode };
 }
