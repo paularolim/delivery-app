@@ -4,11 +4,14 @@ import { LoginViewModel, ScreenProps } from './types';
 
 export function useLoginViewModel({ navigation }: ScreenProps): LoginViewModel {
   const [secureMode, setSecureMode] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   const { login } = useAuth();
 
   const handleLogin = async (email: string, password: string): Promise<void> => {
-    login({ email, password });
+    setLoading(true);
+    await login({ email, password });
+    setLoading(false);
   };
 
   const handleSignUp = (): void => {
@@ -19,5 +22,5 @@ export function useLoginViewModel({ navigation }: ScreenProps): LoginViewModel {
     setSecureMode(!secureMode);
   };
 
-  return { handleLogin, handleSignUp, toggleSecure, secureMode };
+  return { handleLogin, handleSignUp, toggleSecure, secureMode, loading };
 }

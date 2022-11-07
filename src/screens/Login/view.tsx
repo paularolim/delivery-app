@@ -16,6 +16,7 @@ import { InputGroup } from './styles';
 import { ScreenProps } from './types';
 import { useLoginViewModel } from './view.model';
 import { schema, ValidationSchema } from './validation';
+import { Animation } from '../../components/Animation';
 
 const { height } = Dimensions.get('screen');
 
@@ -26,6 +27,7 @@ export function LoginView({ navigation, route }: ScreenProps) {
     handleSignUp,
     secureMode,
     toggleSecure,
+    loading,
   } = useLoginViewModel({
     navigation,
     route,
@@ -104,7 +106,11 @@ export function LoginView({ navigation, route }: ScreenProps) {
             )}
           />
 
-          <Button onPress={handleSubmit(onSubmit)}>Login</Button>
+          {loading ? (
+            <Animation name="coffeeLoading" />
+          ) : (
+            <Button onPress={handleSubmit(onSubmit)}>Login</Button>
+          )}
 
           <GroupLabelFooter
             label="Don't have an account?"

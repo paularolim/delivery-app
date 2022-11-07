@@ -3,6 +3,7 @@ import React from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { Dimensions, View } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { Animation } from '../../components/Animation';
 
 import { BackgroundCircles } from '../../components/BackgroundCircles';
 import { Button } from '../../components/Button';
@@ -25,6 +26,7 @@ export function RegisterView({ navigation, route }: ScreenProps) {
     handleSignUp,
     secureMode,
     toggleSecure,
+    loading,
   } = useRegisterViewModel({ navigation, route });
 
   const { control, handleSubmit } = useForm<ValidationSchema>({ resolver: yupResolver(schema) });
@@ -150,7 +152,11 @@ export function RegisterView({ navigation, route }: ScreenProps) {
             )}
           />
 
-          <Button onPress={handleSubmit(onSubmit)}>Sign up</Button>
+          {loading ? (
+            <Animation name="coffeeLoading" />
+          ) : (
+            <Button onPress={handleSubmit(onSubmit)}>Sign up</Button>
+          )}
 
           <GroupLabelFooter label="Already have account?" linkLabel="Login" onPress={handleLogin} />
         </KeyboardAwareScrollView>

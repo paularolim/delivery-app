@@ -5,15 +5,15 @@
 - [ ] improve this documentation
 - [x] create icon component
 - [x] add password visibility to input
-- [ ] add form validations to login (react hook form & yup)
-- [ ] add loading feedback to login
+- [x] add form validations to login (react hook form & yup)
+- [x] add loading feedback to login
 - [ ] add error feedback to login
 - [x] hide keyboard when tap outside input to login
-- [ ] add form validations to sign up (react hook form & yup)
-- [ ] add loading feedback to sign up
+- [x] add form validations to sign up (react hook form & yup)
+- [x] add loading feedback to sign up
 - [ ] add error feedback to sign up
-- [ ] hide keyboard when tap outside input to sign up
-- [ ] add phone mask to input on sign up
+- [x] hide keyboard when tap outside input to sign up
+- [x] add phone mask to input on sign up
 - [ ] decode jwt and show user name on drawer menu
 - [ ] create home screen
 - [ ] create profile screen
