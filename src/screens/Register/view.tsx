@@ -59,7 +59,7 @@ export function RegisterView({ navigation, route }: ScreenProps) {
                   <Input.Field
                     placeholder="Name Lastname"
                     keyboardType="default"
-                    autoCapitalize="none"
+                    autoCapitalize="words"
                     autoComplete="off"
                     autoCorrect={false}
                     onChangeText={onChange}
@@ -132,14 +132,14 @@ export function RegisterView({ navigation, route }: ScreenProps) {
               <InputGroup>
                 <Input.Label>Phone</Input.Label>
                 <Input.Root>
-                  <Input.Field
+                  <Input.MaskField
                     placeholder="(00) 00000-0000"
                     keyboardType="phone-pad"
                     maskType="phone-br"
                     autoCapitalize="none"
                     autoComplete="off"
                     autoCorrect={false}
-                    onChangeText={onChange}
+                    onChangeText={(_, unmasked) => onChange(unmasked)}
                     onBlur={onBlur}
                     value={value}
                     maxLength={16}
