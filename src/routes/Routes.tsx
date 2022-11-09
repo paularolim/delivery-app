@@ -1,5 +1,6 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React from 'react';
+import { Loading } from '../components/Loading';
 import { useAuth } from '../contexts/Auth';
 import { Login } from '../screens/Login';
 import { Register } from '../screens/Register';
@@ -9,7 +10,11 @@ import { StackScreens } from './types';
 const Stack = createNativeStackNavigator<StackScreens>();
 
 export function Routes() {
-  const { isLoggedIn } = useAuth();
+  const { isLoggedIn, loading } = useAuth();
+
+  if (loading) {
+    return <Loading />;
+  }
 
   return (
     <Stack.Navigator initialRouteName="Login">

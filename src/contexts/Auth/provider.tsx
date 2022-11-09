@@ -1,23 +1,24 @@
-import React, { useCallback, useMemo, useState } from 'react';
-// eslint-disable-next-line camelcase
-import jwt_decode from 'jwt-decode';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import jwtDecode from 'jwt-decode';
 import { AuthContext } from './context';
-import { AuthContextProps, AuthProviderProps, LoginParams, User } from './types';
+import { AuthContextProps, AuthProviderProps, LoginParams } from './types';
 import { authLogin } from '../../services/authentication';
+import { useUserStore } from '../../states/user';
 
 export function AuthProvider({ children }: AuthProviderProps) {
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useUserStore((state) => [state.user, state.setUser]);
+  const [loading, setLoading] = useState(true);
 
   const login = useCallback(async ({ email, password }: LoginParams) => {
     const response = await authLogin({ email, password });
     if (response?.token) {
-      const decoded = jwt_decode<{ id: string; name: string }>(response.token);
+      const decoded = jwtDecode<{ id: string; name: string }>(response.token);
       setUser({ id: decoded?.id || '', name: decoded?.name || '' });
     }
   }, []);
 
   const logout = useCallback(() => {
-    setUser(() => null);
+    setUser(null);
   }, []);
 
   const value: AuthContextProps = useMemo(
@@ -26,9 +27,16 @@ export function AuthProvider({ children }: AuthProviderProps) {
       user,
       login,
       logout,
+      loading,
     }),
-    [user],
+    [user, loading],
   );
+
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+    }, 0);
+  }, [user]);
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
