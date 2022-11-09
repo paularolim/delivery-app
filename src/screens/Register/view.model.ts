@@ -5,6 +5,7 @@ import { RegisterViewModel, ScreenProps } from './types';
 export function useRegisterViewModel({ navigation }: ScreenProps): RegisterViewModel {
   const [secureMode, setSecureMode] = useState(true);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
 
   const handleLogin = (): void => {
     navigation.navigate('Login');
@@ -16,8 +17,10 @@ export function useRegisterViewModel({ navigation }: ScreenProps): RegisterViewM
     const response = await authRegister({ name, email, password, phone });
     if (response) {
       navigation.navigate('Login');
+      return;
     }
     setLoading(false);
+    setError(true);
   };
 
   const toggleSecure = (): void => {
@@ -30,5 +33,6 @@ export function useRegisterViewModel({ navigation }: ScreenProps): RegisterViewM
     toggleSecure,
     secureMode,
     loading,
+    error,
   };
 }

@@ -11,6 +11,7 @@ import { GroupLabelFooter } from '../../components/GroupLabelFooter';
 import { Icon } from '../../components/Icon';
 import { Input } from '../../components/Input';
 import { Logo } from '../../components/Logo';
+import { MessageFeedback } from '../../components/MessageFeedback';
 import { TitlePage } from '../../components/TitlePage';
 import { InputGroup } from './styles';
 import { ScreenProps } from './types';
@@ -27,6 +28,7 @@ export function RegisterView({ navigation, route }: ScreenProps) {
     secureMode,
     toggleSecure,
     loading,
+    error: errorRegister,
   } = useRegisterViewModel({ navigation, route });
 
   const { control, handleSubmit } = useForm<ValidationSchema>({ resolver: yupResolver(schema) });
@@ -50,6 +52,15 @@ export function RegisterView({ navigation, route }: ScreenProps) {
         >
           <Logo />
           <TitlePage title="Sign up" />
+
+          {errorRegister && (
+            <MessageFeedback
+              type="error"
+              title="Ops!"
+              message="Unable to register :("
+              style={{ marginBottom: 12 }}
+            />
+          )}
 
           <Controller
             name="name"

@@ -10,4 +10,5 @@ export interface RegisterViewModel {
   secureMode: boolean;
   toggleSecure: () => void;
   loading: boolean;
+  error: boolean;
 }
