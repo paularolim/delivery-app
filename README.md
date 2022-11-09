@@ -3,6 +3,8 @@
 ## TODO
 
 - [ ] improve this documentation
+- [x] change app icon (ios & android)
+- [x] change app display name (ios & android)
 - [x] create icon component
 - [x] add password visibility to input
 - [x] add form validations to login (react hook form & yup)
