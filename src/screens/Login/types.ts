@@ -9,4 +9,5 @@ export interface LoginViewModel {
   secureMode: boolean;
   toggleSecure: () => void;
   loading: boolean;
+  error: boolean;
 }

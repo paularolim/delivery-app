@@ -14,7 +14,9 @@ export function AuthProvider({ children }: AuthProviderProps) {
     if (response?.token) {
       const decoded = jwtDecode<{ id: string; name: string }>(response.token);
       setUser({ id: decoded?.id || '', name: decoded?.name || '' });
+      return true;
     }
+    return false;
   }, []);
 
   const logout = useCallback(() => {

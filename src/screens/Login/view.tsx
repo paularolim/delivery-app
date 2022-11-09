@@ -17,6 +17,7 @@ import { ScreenProps } from './types';
 import { useLoginViewModel } from './view.model';
 import { schema, ValidationSchema } from './validation';
 import { Animation } from '../../components/Animation';
+import { MessageFeedback } from '../../components/MessageFeedback';
 
 const { height } = Dimensions.get('screen');
 
@@ -28,6 +29,7 @@ export function LoginView({ navigation, route }: ScreenProps) {
     secureMode,
     toggleSecure,
     loading,
+    error: loginError,
   } = useLoginViewModel({
     navigation,
     route,
@@ -55,6 +57,15 @@ export function LoginView({ navigation, route }: ScreenProps) {
           <Logo />
 
           <TitlePage title="Login" />
+
+          {loginError && (
+            <MessageFeedback
+              type="error"
+              title="Ops!"
+              message="Unable to login :("
+              style={{ marginBottom: 12 }}
+            />
+          )}
 
           <Controller
             control={control}
