@@ -18,7 +18,7 @@
 - [ ] create home screen
 - [ ] create profile screen
 - [ ] create favorites screen
-- [ ] persist logged user data
+- [x] persist logged user data
 
 ## Troubleshoot
 
