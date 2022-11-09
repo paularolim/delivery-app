@@ -17,7 +17,7 @@ export function Routes() {
   }
 
   return (
-    <Stack.Navigator initialRouteName="Login">
+    <Stack.Navigator initialRouteName={!isLoggedIn ? 'Login' : 'AppRoutes'}>
       {!isLoggedIn && (
         <Stack.Group navigationKey="Auth" screenOptions={{ headerShown: false }}>
           <Stack.Screen name="Login" component={Login} />

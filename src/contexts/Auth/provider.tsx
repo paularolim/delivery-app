@@ -37,7 +37,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
-    }, 0);
+    }, 1);
   }, [user]);
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
