@@ -9,7 +9,14 @@ import { Animation } from '../Animation';
  */
 export function LoadingView() {
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+    <View
+      style={{
+        backgroundColor: '#D7D7D7',
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
       <Animation name="coffeeLoading" />
     </View>
   );
